@@ -14,7 +14,7 @@ import com.qf.nwt.application.fragment.Match;
 import com.qf.nwt.application.fragment.Me;
 import com.qf.nwt.application.fragment.Show;
 import com.qf.nwt.application.fragment.Tendency;
-
+//这是主文件夹
 public class MainActivity extends AppCompatActivity {
 
     private RadioGroup rgp;
