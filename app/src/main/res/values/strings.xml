@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Shopping</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="string_temperature">温度</string>
+    <string name="string_occasion">场合</string>
+    <string name="string_color">颜色</string>
+    <string name="string_all_color">颜色</string>
+    <string name="string_all_occasion">场合</string>
+    <string name="string_all_temperature">温度</string>
 </resources>
