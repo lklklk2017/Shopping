@@ -3,4 +3,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recyitem_name">用户名称</string>
+    <string name="recyitem_like">点赞量</string>
+    <string name="recyitem_commit">评论量</string>
+    <string name="recyitem_title">#title#</string>
+    <string name="rightspecial_title">标题</string>
+    <string name="rightspecial_desc">相关描述</string>
+    <string name="dreamwork_desc">这是描述</string>
+    <string name="discount_title">展示title</string>
+    <string name="discount_time">展示时间</string>
+
 </resources>

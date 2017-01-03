@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -14,7 +15,7 @@ import com.qf.nwt.application.fragment.Match;
 import com.qf.nwt.application.fragment.Me;
 import com.qf.nwt.application.fragment.Show;
 import com.qf.nwt.application.fragment.Tendency;
-//这是主文件夹
+
 public class MainActivity extends AppCompatActivity {
 
     private RadioGroup rgp;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void initListener() {
         rgp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(RadioGroup group, int i) {
 

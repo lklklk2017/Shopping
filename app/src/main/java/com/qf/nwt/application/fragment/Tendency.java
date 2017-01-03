@@ -74,7 +74,7 @@ public class Tendency extends Fragment {
     }
 
     private void initAdapter() {
-        adapterOfTendency = new AdapterOfTendency(getFragmentManager(),fragments_list,titles);
+        adapterOfTendency = new AdapterOfTendency(getChildFragmentManager(),fragments_list,titles);
         vp.setAdapter(adapterOfTendency);
     }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardPreventCornerOverlap="true"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="0dp"
+    >
+    <ImageView
+        android:id="@+id/img_OneLarge"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@mipmap/ic_launcher"
+        />
+
+</android.support.v7.widget.CardView>

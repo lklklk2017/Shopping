@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.qf.nwt.application.fragment.Tendency">
+    tools:context="com.qf.nwt.application.fragment.Tendency"
+    >
 
     <!-- TODO: Update blank fragment layout -->
 

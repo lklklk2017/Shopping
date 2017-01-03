@@ -11,6 +11,7 @@ import com.qf.nwt.application.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
  */
 public class Cart extends Fragment {
 
