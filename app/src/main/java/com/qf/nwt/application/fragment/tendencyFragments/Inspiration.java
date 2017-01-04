@@ -2,7 +2,6 @@ package com.qf.nwt.application.fragment.tendencyFragments;
 
 
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,7 +39,7 @@ public class Inspiration extends Fragment {
     private AdapterOfInspirRcy adapter;
     private SwipeRefreshLayout swipe;
     private HttpApiServiceOfInspiration api;
-    private static int page = 1;
+    private static int page;
 
     public Inspiration() {
         // Required empty public constructor
@@ -51,7 +50,7 @@ public class Inspiration extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_inspiration, container, false);
-        
+        page = 1;//利用碎片的生命周期来初始化每次看到的接口是最新的
         init();
         
         return view;

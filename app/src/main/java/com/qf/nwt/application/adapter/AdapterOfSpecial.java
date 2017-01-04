@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.bean.SpecialInfo;
 import com.qf.nwt.application.fragment.tendencyFragments.Special;
 
 import java.util.ArrayList;
@@ -24,11 +26,17 @@ public class AdapterOfSpecial extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int LEFT = 2;
 
     private LayoutInflater layoutInflater;
-    private List<String> list;
+    private List<SpecialInfo.TopicsBean> list;
+    private Context context;
 
-    public AdapterOfSpecial(Context context, List<String> list) {
+    public AdapterOfSpecial(Context context) {
         this.layoutInflater = layoutInflater.from(context);
+        this.context = context;
+    }
+
+    public void setList(List<SpecialInfo.TopicsBean> list) {
         this.list = list;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -55,9 +63,10 @@ public class AdapterOfSpecial extends RecyclerView.Adapter<RecyclerView.ViewHold
                 view = layoutInflater.inflate(R.layout.recycleitem_spcialleft, parent, false);
                 return new LeftViewHolder(view);
         }
+
+        //不会执行到这里
         return null;
     }
-
 
     /**
      * 绑定数值（根据类型的不同）
@@ -67,25 +76,40 @@ public class AdapterOfSpecial extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
+        SpecialInfo.TopicsBean bean = list.get(position);
         int n = position%2;
 
         if(0==n){
             LeftViewHolder leftholder = (LeftViewHolder) holder;
-            leftholder.title.setText("这是左布局");
-            leftholder.desc.setText("左布局");
-//            leftholder.img.setImageResource(R.drawable.uncheck);
+
+            leftholder.title.setText(bean.getTitle());
+            leftholder.desc.setText(bean.getDesc());
+            Glide.with(context).load(bean.getImg())
+                    .placeholder(R.mipmap.ic_launcher)
+                    .skipMemoryCache(true)
+                    .into(leftholder.img);
+            leftholder.img.setScaleType(ImageView.ScaleType.FIT_XY);
         }else {
             RightViewHolder rightholder = (RightViewHolder) holder;
-            rightholder.title.setText("这是右布局");
-            rightholder.desc.setText("右布局");
-//            rightholder.img.setImageResource(R.drawable.checked);
-        }
 
+            rightholder.title.setText(bean.getTitle());
+            rightholder.desc.setText(bean.getDesc());
+            Glide.with(context).load(bean.getImg())
+                    .placeholder(R.mipmap.ic_launcher)
+                    .skipMemoryCache(true)
+                    .into(rightholder.img);
+            rightholder.img.setScaleType(ImageView.ScaleType.FIT_XY);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+
+        if(list!=null&&list.size()!=0){
+            return list.size();
+        }else{
+            return -1;
+        }
     }
 
     /**

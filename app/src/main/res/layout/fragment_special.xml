@@ -6,10 +6,16 @@
     tools:context="com.qf.nwt.application.fragment.tendencyFragments.Special">
 
     <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_Special"
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_Special"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_Special"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>
