@@ -50,7 +50,6 @@ public class Hot extends Fragment {
     private TabLayout tablayout;
 
     public Hot() {
-
     }
 
     @Override

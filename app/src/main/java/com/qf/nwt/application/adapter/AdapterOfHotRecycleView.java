@@ -10,13 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
 import com.qf.nwt.application.bean.HotInfo;
-import com.qf.nwt.application.bean.Info;
 import com.qf.nwt.application.utils.ScreenMatch;
 
 import java.util.ArrayList;
@@ -174,11 +171,10 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
                 initDots(holder1.dotsLayout);
 
                 //设置vp的监听事件
-                holder1.vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                holder1.vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
                     @Override
                     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
                     }
 
                     @Override
@@ -196,6 +192,7 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
                                 dotsList.get(i).setImageDrawable(drawable);
                             }
                         }
+
                     }
 
                     @Override
@@ -226,6 +223,15 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
 
                 Glide.with(context).load(entries.get(3).getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder2.img_rb);
                 holder2.img_rb.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                //设置控件的监听事件
+//                holder2.img_lt.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(context, NewProduct.class);
+//                        context.startActivity(intent);
+//                    }
+//                });
             }
 
         } else if (holder instanceof OneViewHolder) {

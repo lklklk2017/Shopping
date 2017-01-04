@@ -15,3 +15,4 @@ public interface HttpApiServiceOfHot {
     Call<HotInfo> getData();
 
 }
+

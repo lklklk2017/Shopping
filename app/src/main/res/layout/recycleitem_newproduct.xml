@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    >
+    <!--图片-->
+    <ImageView
+        android:id="@+id/img_newProduct"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@mipmap/ic_launcher"
+        />
+    <!--商标-->
+    <TextView
+        android:id="@+id/brand_newProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这是商标"
+        />
+    <!--title-->
+    <TextView
+        android:id="@+id/title_newProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这是标题"
+        />
+    <!--price-->
+    <TextView
+        android:id="@+id/price_newProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这是价位"
+        />
+</LinearLayout>
