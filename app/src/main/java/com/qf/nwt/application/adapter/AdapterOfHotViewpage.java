@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.qf.nwt.application.R;
+
 import java.util.List;
 
 /**
@@ -15,15 +18,15 @@ import java.util.List;
 public class AdapterOfHotViewpage extends PagerAdapter {
 
     private Context context;
-    private List<Integer> list;
+    private List<String> list;
 
-    public AdapterOfHotViewpage(Context context,List<Integer> list) {
+    public AdapterOfHotViewpage(Context context,List<String> list) {
 
         this.context = context;
         this.list = list;
     }
 
-    public void setList(List<Integer> list) {
+    public void setList(List<String> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -45,7 +48,10 @@ public class AdapterOfHotViewpage extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView img = new ImageView(context);
-        img.setImageResource(list.get(position%list.size()));
+        Glide.with(context).
+                load(list.get(position%list.size()))
+                .placeholder(R.mipmap.ic_launcher)//当数据没有时候使用该图标代替
+                .into(img);
         img.setScaleType(ImageView.ScaleType.FIT_XY);
         container.addView(img);
 

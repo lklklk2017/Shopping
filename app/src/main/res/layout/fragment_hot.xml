@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.qf.nwt.application.fragment.tendencyFragments.Hot"
-    android:background="@android:color/darker_gray"
+    android:background="@android:color/white"
     >
 
     <android.support.v4.widget.SwipeRefreshLayout

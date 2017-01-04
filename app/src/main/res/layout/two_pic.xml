@@ -22,7 +22,6 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="200dp"
-            android:background="@mipmap/ic_launcher"
             />
 
         <ImageView
@@ -30,7 +29,6 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="200dp"
-            android:background="@mipmap/ic_launcher"
             />
 
     </LinearLayout>

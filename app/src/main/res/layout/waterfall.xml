@@ -13,7 +13,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="380dp"
-        android:background="@android:color/holo_orange_light">
+        >
 
     <!--左上布局-->
         <RelativeLayout
@@ -22,13 +22,13 @@
             android:layout_height="0dp"
             app:layout_heightPercent="45%"
             app:layout_widthPercent= "50%"
-            android:background="@android:color/holo_red_light" >
+            >
 
             <ImageView
                 android:id="@+id/img_newPic_water"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@mipmap/ic_launcher"/>
+                />
         </RelativeLayout>
 
         <!--右上布局-->
@@ -39,12 +39,12 @@
             app:layout_heightPercent="55%"
             app:layout_widthPercent= "50%"
             android:layout_toRightOf="@id/img_new_water"
-            android:background="@android:color/holo_blue_bright">
+            >
             <ImageView
                 android:id="@+id/img_rtPic_water"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@mipmap/ic_launcher"/>
+                />
 
         </RelativeLayout>
 
@@ -56,12 +56,12 @@
             app:layout_heightPercent="55%"
             app:layout_widthPercent= "50%"
             android:layout_below="@id/img_new_water"
-            android:background="@android:color/black" >
+            >
             <ImageView
                 android:id="@+id/img_lbPic_water"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@mipmap/ic_launcher"/>
+                />
         </RelativeLayout>
 
         <!--右下布局-->
@@ -73,12 +73,12 @@
             app:layout_widthPercent= "50%"
             android:layout_toRightOf="@id/img_lb_water"
             android:layout_below="@id/img_rt_water"
-            android:background="@android:color/holo_purple" >
+            >
             <ImageView
                 android:id="@+id/img_rbPic_water"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@mipmap/ic_launcher"/>
+                />
         </RelativeLayout>
 
 

@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.bean.HotInfo;
 import com.qf.nwt.application.bean.Info;
 import com.qf.nwt.application.utils.ScreenMatch;
 
@@ -35,21 +38,34 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
     private static final int ITEM_TYPE_CONTENT_TWO = 6;//两张图片合并
     private static final int ITEM_TYPE_CONTENT_ONE_LARGE = 8;//一张大图
 
-    private List<Info> list;
+    private List<HotInfo.ContentBean> list;
     private LayoutInflater layoutInflater;
     private Context context;
-    private List<Integer> list_vp;
+    private List<String> list_vp;
     private AdapterOfHotViewpage adapterOfHotViewpage;
     private List<ImageView> dotsList;//用于存放小点点的集合
 
-    public AdapterOfHotRecycleView( Context context) {
+    public AdapterOfHotRecycleView(Context context) {
         this.layoutInflater = layoutInflater.from(context);
         this.context = context;
     }
 
-    public void setList(List<Info> list,List<Integer> list_vp) {
+    public void setList(List<HotInfo.ContentBean> list, List<String> list_vp) {
         this.list = list;
         this.list_vp = list_vp;
+        notifyDataSetChanged();
+    }
+
+    //传出vipager的数据
+    public void setviewpagerList(List<String> list_vp) {
+        this.list_vp = list_vp;
+        notifyDataSetChanged();
+    }
+
+    public void setItemList(List<HotInfo.ContentBean> list) {
+        Log.i("info","setItemList===========list.size()"+list.size());
+        this.list = list;
+        notifyDataSetChanged();
     }
 
     //判断当前item是否是header
@@ -78,7 +94,6 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
 
     //判断当前item是否是一张大图布局
     public boolean isLargeOne(int position) {
-
         return position == 6;
     }
 
@@ -87,19 +102,14 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
 
         if (isHeaderView(position)) {
-            Log.i("info", "这是头布局====" + position);
             return ITEM_TYPE_HEADER;
         } else if (isOneView(position)) {
-            Log.i("info", "这是isOneView====" + position);
             return ITEM_TYPE_CONTENT_ONE;
         } else if (isTwoView(position)) {
-            Log.i("info", "这是isTwoView====" + position);
             return ITEM_TYPE_CONTENT_TWO;
         } else if (isWaterView(position)) {
-            Log.i("info", "这是isWaterView====" + position);
             return ITEM_TYPE_CONTENT_WATERFALL;
         } else if (isLargeOne(position)) {
-            Log.i("info", "这是isLargeOne====" + position);
             return ITEM_TYPE_CONTENT_ONE_LARGE;
         }
 
@@ -152,64 +162,126 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof HeaderViewHolder) {
-            //头布局是一个vp，初始化vp的数据
-            HeaderViewHolder holder1 = ((HeaderViewHolder) holder);
-            //初始化数据适配器
-            adapterOfHotViewpage = new AdapterOfHotViewpage(context,list_vp);
-            holder1.vp.setAdapter(adapterOfHotViewpage);
 
-            //初始化小点点
-            initDots(holder1.dotsLayout);
+            if(list_vp!=null&&list_vp.size()!=0){
+                //头布局是一个vp，初始化vp的数据
+                HeaderViewHolder holder1 = ((HeaderViewHolder) holder);
+                //初始化数据适配器
+                adapterOfHotViewpage = new AdapterOfHotViewpage(context, list_vp);
+                holder1.vp.setAdapter(adapterOfHotViewpage);
 
-            //设置vp的监听事件
-            holder1.vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                //初始化小点点
+                initDots(holder1.dotsLayout);
 
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //设置vp的监听事件
+                holder1.vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-                }
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                @Override
-                public void onPageSelected(int position) {
-                    //每当vp页面的滑动有变化或者被选中时候，重新更新小点点list中的图片，当前选中则名色，否则暗色
-                    for (int i = 0; i < list_vp.size(); i++) {
-                        Drawable drawable = null;
+                    }
 
-                        if (position%list_vp.size() == i) {
-                            drawable = context.getResources().getDrawable(R.drawable.checked);
-                            dotsList.get(i).setImageDrawable(drawable);
-                        } else {
-                            drawable = context.getResources().getDrawable(R.drawable.uncheck);
-                            dotsList.get(i).setImageDrawable(drawable);
+                    @Override
+                    public void onPageSelected(int position) {
+
+                        //每当vp页面的滑动有变化或者被选中时候，重新更新小点点list中的图片，当前选中为明色，否则暗色
+                        for (int i = 0; i < list_vp.size(); i++) {
+                            Drawable drawable = null;
+
+                            if (position % list_vp.size() == i) {
+                                drawable = context.getResources().getDrawable(R.drawable.checked);
+                                dotsList.get(i).setImageDrawable(drawable);
+                            } else {
+                                drawable = context.getResources().getDrawable(R.drawable.uncheck);
+                                dotsList.get(i).setImageDrawable(drawable);
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onPageScrollStateChanged(int state) {
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
 
-                }
-            });
+                    }
+                });
 
-            //开始滚动
-            holder1.vp.startAutoScroll(4000);
+                //开始滚动
+                holder1.vp.startAutoScroll(4000);
+            }
 
         } else if (holder instanceof WaterViewHolder) {
-//            WaterViewHolder holder2 = ((WaterViewHolder) holder);
-//            holder2.img.setImageResource(list.get(position).getPicId());
-//            holder2.img.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,position*100));
-//            holder2.text.setText(list.get(position).getName());
-        } else if (holder instanceof OneViewHolder) {
-            OneViewHolder holder3 = ((OneViewHolder) holder);
-//            holder3.text.setText("foot");
-        } else if (holder instanceof TwoViewHolder) {
-            TwoViewHolder holder4 = ((TwoViewHolder) holder);
-//            holder4.text.setText("foot");
-        } else if (holder instanceof OneLargeViewHolder) {
-            OneLargeViewHolder holder5 = ((OneLargeViewHolder) holder);
-//            holder5.text.setText("foot");
-        }
+            if(null != list&&list.size()!=0){
+                WaterViewHolder holder2 = ((WaterViewHolder) holder);
+                HotInfo.ContentBean contentBean = list.get(1);
 
+                List<HotInfo.ContentBean.EntriesBean> entries = contentBean.getEntries();
+
+                Glide.with(context).load(entries.get(0).getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder2.img_lt);
+                holder2.img_lt.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                Glide.with(context).load(entries.get(1).getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder2.img_rt);
+                holder2.img_rt.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                Glide.with(context).load(entries.get(2).getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder2.img_lb);
+                holder2.img_lb.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                Glide.with(context).load(entries.get(3).getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder2.img_rb);
+                holder2.img_rb.setScaleType(ImageView.ScaleType.FIT_XY);
+            }
+
+        } else if (holder instanceof OneViewHolder) {
+            if(null != list&&list.size()!=0){
+                OneViewHolder holder3 = ((OneViewHolder) holder);
+                if(position==2){
+                    HotInfo.ContentBean contentBean = list.get(2);
+                    Glide.with(context).load(contentBean.getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder3.img);
+                    holder3.img.setScaleType(ImageView.ScaleType.FIT_XY);
+                }else if(position == 5){
+                    HotInfo.ContentBean contentBean = list.get(5);
+                    Glide.with(context).load(contentBean.getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder3.img);
+                    holder3.img.setScaleType(ImageView.ScaleType.FIT_XY);
+                }else if(position == 7){
+                    HotInfo.ContentBean contentBean = list.get(7);
+                    Glide.with(context).load(contentBean.getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder3.img);
+                    holder3.img.setScaleType(ImageView.ScaleType.FIT_XY);
+                }
+
+            }
+
+        } else if (holder instanceof TwoViewHolder) {
+            if(null != list&&list.size()!=0) {
+
+                TwoViewHolder holder4 = ((TwoViewHolder) holder);
+                if(position==3){
+                    HotInfo.ContentBean contentBean = list.get(3);
+                    List<HotInfo.ContentBean.EntriesBean> entries = contentBean.getEntries();
+
+                    Glide.with(context).load(entries.get(0).getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder4.img_left);
+                    holder4.img_left.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                    Glide.with(context).load(entries.get(1).getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder4.img_right);
+                    holder4.img_right.setScaleType(ImageView.ScaleType.FIT_XY);
+                }else if(position==4){
+                    HotInfo.ContentBean contentBean = list.get(4);
+                    List<HotInfo.ContentBean.EntriesBean> entries = contentBean.getEntries();
+
+                    Glide.with(context).load(entries.get(0).getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder4.img_left);
+                    holder4.img_left.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                    Glide.with(context).load(entries.get(1).getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder4.img_right);
+                    holder4.img_right.setScaleType(ImageView.ScaleType.FIT_XY);
+                }
+
+            }
+        } else if (holder instanceof OneLargeViewHolder) {
+            if(null != list&&list.size()!=0) {
+
+                OneLargeViewHolder holder5 = ((OneLargeViewHolder) holder);
+                HotInfo.ContentBean contentBean = list.get(6);
+
+                Glide.with(context).load(contentBean.getImgURL()).placeholder(R.mipmap.ic_launcher).into(holder5.img);
+                holder5.img.setScaleType(ImageView.ScaleType.FIT_XY);
+            }
+        }
     }
 
     /**
@@ -240,8 +312,8 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
             img.setImageDrawable(drawable);
 
             //考虑适配：
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenMatch.dp2px(15, context), ScreenMatch.dp2px(15, context));
-            params.setMargins(ScreenMatch.dp2px(5, context), 0, ScreenMatch.dp2px(5, context), 0);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenMatch.dp2px(15, context), ScreenMatch.dp2px(3, context));
+            params.setMargins(ScreenMatch.dp2px(3, context), 0, ScreenMatch.dp2px(3, context), 0);
 
             //添加到父容器中去,同时设置img的布局属性
             dotsLayout.addView(img, params);
@@ -252,8 +324,8 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        if(list!=null&&0!=list.size()) {
-            return list.size();
+        if(null != list&& list.size()!=0){
+            return 8;
         }else{
             return -1;
         }
