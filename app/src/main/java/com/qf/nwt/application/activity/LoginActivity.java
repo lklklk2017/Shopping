@@ -164,6 +164,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
     /**
      * 初始化数据
      */
