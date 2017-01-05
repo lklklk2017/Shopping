@@ -84,6 +84,14 @@ public class Cart extends Fragment {
      * 初始化监听
      */
     private void initListener() {
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
+
         adapterOfShopCar.setOnItemCheckedListener(new OnItemCheckedListener() {
             @Override
             public void onItemCheckedListener(CheckBox checkBox, int pos) {
@@ -178,6 +186,7 @@ public class Cart extends Fragment {
                             carts = shopCarEntity.getCarts();
 
                         }
+                        refreshLayout.setRefreshing(false);
 
                         /*//设置监听
                         adapterOfShopCar.setOnItemCheckedListener(new OnItemCheckedListener() {
