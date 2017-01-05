@@ -161,7 +161,7 @@ public class Inspiration extends Fragment {
 
             @Override
             public void onFailure(Call<InspirationInfo> call, Throwable t) {
-                Toast.makeText(getContext(),"请求网络数据失败", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(),"请求网络数据失败", Toast.LENGTH_LONG).show();
                 call.cancel();
                 swipe.setRefreshing(false);
             }

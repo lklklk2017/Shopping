@@ -1,15 +1,22 @@
 package com.qf.nwt.application.fragment;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
 import com.qf.nwt.application.activity.CollectionActivity;
 import com.qf.nwt.application.activity.EditProfileActivity;
@@ -17,13 +24,23 @@ import com.qf.nwt.application.activity.LoginActivity;
 import com.qf.nwt.application.activity.MessageCenterActivity;
 import com.qf.nwt.application.activity.OrderActivity;
 import com.qf.nwt.application.activity.SettingActivity;
+import com.qf.nwt.application.bean.LoginEntity;
+import com.qf.nwt.application.service.LoginHttpService;
+
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Me extends Fragment implements View.OnClickListener {
 
-
+    private Context context;
     private View view;
     private ImageView img_setting;
     private ImageView img_msg;
@@ -33,11 +50,19 @@ public class Me extends Fragment implements View.OnClickListener {
     private RelativeLayout completed;
     private ImageView img_head;
     private RelativeLayout layout_collection;
+    private SwipeRefreshLayout refreshLayout;
+    private TextView tv_name;
+    private TextView tv_experience;
 
     public Me() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +77,12 @@ public class Me extends Fragment implements View.OnClickListener {
      * 设置监听
      */
     private void initListener() {
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
         img_setting.setOnClickListener(this);
         img_msg.setOnClickListener(this);
         all_order.setOnClickListener(this);
@@ -66,6 +97,7 @@ public class Me extends Fragment implements View.OnClickListener {
      * 找id
      */
     private void findViewID() {
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
         img_setting = (ImageView) view.findViewById(R.id.img_setting);
         img_msg = (ImageView) view.findViewById(R.id.img_msg);
         img_head = (ImageView) view.findViewById(R.id.img_head);
@@ -74,6 +106,8 @@ public class Me extends Fragment implements View.OnClickListener {
         underway = (RelativeLayout) view.findViewById(R.id.layout_underway);
         completed = (RelativeLayout) view.findViewById(R.id.layout_completed);
         layout_collection = (RelativeLayout) view.findViewById(R.id.layout_collection);
+        tv_name = (TextView) view.findViewById(R.id.tv_name);
+        tv_experience = (TextView) view.findViewById(R.id.tv_experience);
     }
 
     @Override
@@ -127,5 +161,41 @@ public class Me extends Fragment implements View.OnClickListener {
                 startActivity(intent8);
                 break;
         }
+    }
+    /**
+     * 初始化数据
+     */
+    public void initData() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.palshock.cn/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        LoginHttpService loginHttpService = retrofit.create(LoginHttpService.class);
+        Observable<LoginEntity> data = loginHttpService.getData("e10adc3949ba59abbe56e057f20f883e","18408249795");
+        data.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<LoginEntity>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(LoginEntity loginEntity) {
+                        String userImgUrl = loginEntity.getUserImgUrl();
+                        Log.e("====","userImgUrl="+loginEntity.toString());
+                        Glide.with(getContext()).load(userImgUrl).placeholder(R.mipmap.ic_launcher)
+                                .into(img_head);
+                        String userName = loginEntity.getUserName();
+                        tv_name.setText(userName);
+                        refreshLayout.setRefreshing(false);
+                    }
+                });
     }
 }

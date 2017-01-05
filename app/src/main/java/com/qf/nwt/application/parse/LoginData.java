@@ -51,7 +51,7 @@ public class LoginData {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         LoginHttpService loginHttpService = retrofit.create(LoginHttpService.class);
-        Observable<LoginEntity> data = loginHttpService.getData(password,mobile);
+        Observable<LoginEntity> data = loginHttpService.getData("123456","18408249795");
         data.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<LoginEntity>() {
@@ -81,4 +81,5 @@ public class LoginData {
                     }
                 });
     }
+
 }
