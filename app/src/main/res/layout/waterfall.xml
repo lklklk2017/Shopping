@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardPreventCornerOverlap="true"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="0dp"
+        >
+    <com.zhy.android.percent.support.PercentRelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        >
+
+    <!--左上布局-->
+        <RelativeLayout
+            android:id="@+id/img_new_water"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="45%"
+            app:layout_widthPercent= "50%"
+            >
+
+            <ImageView
+                android:id="@+id/img_newPic_water"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </RelativeLayout>
+
+        <!--右上布局-->
+        <RelativeLayout
+            android:id="@+id/img_rt_water"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="55%"
+            app:layout_widthPercent= "50%"
+            android:layout_toRightOf="@id/img_new_water"
+            >
+            <ImageView
+                android:id="@+id/img_rtPic_water"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+        </RelativeLayout>
+
+        <!--左下布局-->
+        <RelativeLayout
+            android:id="@+id/img_lb_water"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="55%"
+            app:layout_widthPercent= "50%"
+            android:layout_below="@id/img_new_water"
+            >
+            <ImageView
+                android:id="@+id/img_lbPic_water"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </RelativeLayout>
+
+        <!--右下布局-->
+        <RelativeLayout
+            android:id="@+id/img_rb_water"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="45%"
+            app:layout_widthPercent= "50%"
+            android:layout_toRightOf="@id/img_lb_water"
+            android:layout_below="@id/img_rt_water"
+            >
+            <ImageView
+                android:id="@+id/img_rbPic_water"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </RelativeLayout>
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+</android.support.v7.widget.CardView>
