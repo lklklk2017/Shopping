@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.qf.nwt.application.activity.NewProductActivity">
+
+    <!--标题预览-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        >
+
+        <!--返回键-->
+        <ImageView
+            android:id="@+id/back_NewProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@mipmap/ic_back"
+            android:layout_alignParentLeft="true"
+            />
+        <!--标题-->
+        <TextView
+            android:id="@+id/title_NewProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:text="新品预览"
+            />
+        <!--右上角功能-->
+        <Button
+            android:id="@+id/order_NewProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/white"
+            android:textSize="18sp"
+            android:text="排序"
+            />
+        <!--<view-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@android:color/black"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--/>-->
+
+    </RelativeLayout>
+
+    <!--recycle+swiperefreslayout-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_NewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--Gridview-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_NewProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_orange_light"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

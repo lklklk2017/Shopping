@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.thinkcool.circletextimageview.CircleTextImageView
+        android:id="@+id/ctiv_match"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="centerCrop"
+        app:citv_border_width="1dp"
+        app:citv_border_color="#000"
+        app:citv_text_size="20dp"
+        app:citv_text_color="#545353"
+        app:citv_text_text="温度"
+        />
+    <!--<de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ctiv_match"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:civ_border_width="1dp"
+        app:civ_border_color="#000"
+        android:background="@mipmap/ic_launcher"
+        />-->
+</LinearLayout>
