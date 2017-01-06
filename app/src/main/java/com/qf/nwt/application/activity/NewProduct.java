@@ -30,6 +30,7 @@ public class NewProduct extends AppCompatActivity {
     private void init() {
 
         initview();
+//        initRetrofit();
         initAdapter();
         initData();
         initListener();

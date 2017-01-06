@@ -1,6 +1,7 @@
 package com.qf.nwt.application.fragment.tendencyFragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.activity.Myapplication;
 import com.qf.nwt.application.adapter.AdapterOfInspirRcy;
 import com.qf.nwt.application.bean.InspirationInfo;
 import com.qf.nwt.application.service.HttpApiServiceOfInspiration;
+import com.qf.nwt.application.utils.MyRetrofitUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +34,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Inspiration extends Fragment {
 
-    private String baseUrl = "http://api.palshock.cn/";
 
     private View view;
     private RecyclerView rcy;
@@ -58,7 +60,6 @@ public class Inspiration extends Fragment {
 
     private void init() {
         initView();
-        initRetrofit();
         initAdapter();
         initData();
         initListetner();
@@ -70,7 +71,7 @@ public class Inspiration extends Fragment {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                initNet();
+                MyRetrofitUtil.getInspirData(page++,list,adapter,swipe);
             }
         });
 
@@ -91,14 +92,7 @@ public class Inspiration extends Fragment {
                     //当rcy停止时候的状态
                     case RecyclerView.SCROLL_STATE_IDLE:
                         if(last==list.size()-1){
-                            initNet();
-                        }
-                        break;
-
-                    //当rcy惯性滚动时候的状态
-                    case RecyclerView.SCROLL_STATE_SETTLING:
-                        if(last==list.size()-1){
-                            initNet();
+                            MyRetrofitUtil.getInspirData(page++,list,adapter,swipe);
                         }
                         break;
                     default:break;
@@ -121,7 +115,7 @@ public class Inspiration extends Fragment {
 
         //初始化retrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl("")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -137,35 +131,7 @@ public class Inspiration extends Fragment {
         list = new ArrayList<>();
 
         //开始调用下载网络的方法
-        initNet();
-    }
-
-    private void initNet() {
-
-        //每次加载数据之前都会开始转圈
-        swipe.setRefreshing(true);
-        Call<InspirationInfo> call = api.getData(page++);
-        call.enqueue(new Callback<InspirationInfo>() {
-            @Override
-            public void onResponse(Call<InspirationInfo> call, Response<InspirationInfo> response) {
-                InspirationInfo info = response.body();
-                List<InspirationInfo.SetsBean> sets = info.getSets();
-                if(sets!=null&&sets.size()!=0){
-
-                    list.addAll(sets);
-                }
-                adapter.setList(list);
-                call.cancel();
-                swipe.setRefreshing(false);
-            }
-
-            @Override
-            public void onFailure(Call<InspirationInfo> call, Throwable t) {
-                Toast.makeText(getContext(),"请求网络数据失败", Toast.LENGTH_LONG).show();
-                call.cancel();
-                swipe.setRefreshing(false);
-            }
-        });
+        MyRetrofitUtil.getInspirData(page++,list,adapter,swipe);
     }
 
     private void initView() {
@@ -173,7 +139,7 @@ public class Inspiration extends Fragment {
         swipe = ((SwipeRefreshLayout) view.findViewById(R.id.swipe_Inspiration));
 
         //初始化rcy
-        rcy.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcy.setLayoutManager(new LinearLayoutManager(Myapplication.getContext()));
 
         //初始化swip
         swipe.setRefreshing(true);

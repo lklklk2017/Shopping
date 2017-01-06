@@ -4,7 +4,6 @@ package com.qf.nwt.application.fragment.tendencyFragments;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.activity.Myapplication;
 import com.qf.nwt.application.adapter.AdapterOfHotRecycleView;
 import com.qf.nwt.application.bean.HotInfo;
 import com.qf.nwt.application.service.HttpApiServiceOfHot;
@@ -47,7 +47,6 @@ public class Hot extends Fragment {
     private Retrofit retrofit;
     private HttpApiServiceOfHot apiServiceOfHot;
     private Call<HotInfo> call;
-    private TabLayout tablayout;
 
     public Hot() {
     }
@@ -153,7 +152,7 @@ public class Hot extends Fragment {
 
             @Override
             public void onFailure(Call<HotInfo> call, Throwable t) {
-                Toast.makeText(getContext(),"网络数据获取失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(Myapplication.getContext(),"网络数据获取失败",Toast.LENGTH_LONG).show();
                 call.cancel();
                 swip.setRefreshing(false);
             }
@@ -170,7 +169,7 @@ public class Hot extends Fragment {
         swip.setRefreshing(true);
 
         //初始化layoutManager
-        rcy.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcy.setLayoutManager(new LinearLayoutManager(Myapplication.getContext()));
     }
 
     public void initDataAgain(){
@@ -209,7 +208,7 @@ public class Hot extends Fragment {
 
             @Override
             public void onFailure(Call<HotInfo> call, Throwable t) {
-                Toast.makeText(getContext(),"网络数据获取失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(Myapplication.getContext(),"网络数据获取失败",Toast.LENGTH_LONG).show();
                 callAgain.cancel();
                 swip.setRefreshing(false);
             }

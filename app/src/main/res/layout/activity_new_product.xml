@@ -43,7 +43,7 @@
             android:textSize="18sp"
             android:text="排序"
             />
-        <view
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black"

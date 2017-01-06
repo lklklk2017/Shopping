@@ -1,9 +1,15 @@
 package com.qf.nwt.application.service;
 
+import com.qf.nwt.application.bean.DiscountInfo;
+import com.qf.nwt.application.bean.DreamWorksInfo;
+import com.qf.nwt.application.bean.InspirationInfo;
 import com.qf.nwt.application.bean.MatchBean;
+import com.qf.nwt.application.bean.SpecialInfo;
+import com.qf.nwt.application.fragment.tendencyFragments.Discount;
 
 import java.util.List;
 
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -41,5 +47,25 @@ public interface MatchApiService {
             @Query("sig") String sig,
             @Query("col") int col
     );
+
+    //折扣
+    @GET("trend/sale/sale_list.psj?token=71bd917527a52c55&ua=Android|2.6.2&sig=52778e6166a21482494682966")
+    Call<DiscountInfo> getMatchData(@Query("page") int page);
+
+    //折扣(方法二)
+    @GET("trend/sale/sale_list.psj?token=71bd917527a52c55&ua=Android|2.6.2&sig=52778e6166a21482494682966")
+    Observable<DiscountInfo> getMatchDiscont(@Query("page") int page);
+
+    //梦工厂
+    @GET("dw/list.psj?token=71bd917527a52c55&ua=Android%7C2.6.2&sig=3752065a89bc1482493986582")
+    Observable<DreamWorksInfo> getMatchDreamWork(@Query("page") int page);
+
+    //专题
+    @GET("trend/topic/free_list.psj?token=71bd917527a52c55&ua=Android%7C2.6.2&sig=1be6ac721aa81482493628568")
+    Observable<SpecialInfo> getMatchSpecial(@Query("page") int page);
+
+    //灵感
+    @GET("trend/set/list.psj?token=71bd917527a52c55&ua=Android%7C2.6.2&sig=97dd7bf86def1482493640117")
+    Observable<InspirationInfo> getMatchInspiration(@Query("page") int page);
 
 }
