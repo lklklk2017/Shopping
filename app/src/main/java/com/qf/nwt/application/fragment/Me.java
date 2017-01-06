@@ -4,6 +4,7 @@ package com.qf.nwt.application.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -69,6 +70,9 @@ public class Me extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me, container, false);
         findViewID();
+        refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.YELLOW);
+        refreshLayout.setRefreshing(true);
+        initData();
         initListener();
         return view;
     }

@@ -1,6 +1,7 @@
 package com.qf.nwt.application.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -74,9 +75,11 @@ public class Cart extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_cart, container, false);
         findViewId();
+        refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.YELLOW);
+        refreshLayout.setRefreshing(true);
         initAdapter();
-        initData();
         initListener();
+        initData();
         return view;
     }
 
