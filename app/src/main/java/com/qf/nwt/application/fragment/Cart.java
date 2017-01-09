@@ -191,47 +191,7 @@ public class Cart extends Fragment {
                         }
                         refreshLayout.setRefreshing(false);
 
-                        /*//设置监听
-                        adapterOfShopCar.setOnItemCheckedListener(new OnItemCheckedListener() {
-                            @Override
-                            public void onItemCheckedListener(CheckBox checkBox, int pos) {
-                                itemChecked(checkBox, pos);
-                            }
-                        });
-                        adapterOfShopCar.setOnNumAscListener(new OnNumAscListener() {
-                            @Override
-                            public void onNumAscListener() {
-                                for (int i = 0; i < cartsBean.getSkus().size(); i++) {
-                                    int quantity = cartsBean.getSkus().get(i).getQuantity();
-                                    quantity++;
-                                    adapterOfShopCar.notifyDataSetChanged();
-                                    totalMoney();
-                                }
-                            }
-                        });
-                        adapterOfShopCar.setOnNumDescListener(new OnNumDescListener() {
-                            @Override
-                            public void onNumDescListener() {
-                                for (int i = 0; i < cartsBean.getSkus().size(); i++) {
-                                    int quantity = cartsBean.getSkus().get(i).getQuantity();
-                                    if ((quantity - 1) >= 0) {
-                                        quantity--;
-                                        adapterOfShopCar.notifyDataSetChanged();
-                                        totalMoney();
-                                    }
-                                }
-                            }
-                        });
-                        ck_all.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                for (int i = 0; i < cartsBean.getSkus().size(); i++) {
-                                    map.put(i,ck_all.isChecked());
-                                }
-                                //设置点击发生变化刷新
-                                adapterOfShopCar.setMap(map);
-                            }
-                        });*/
+
 
                     }
                 });
