@@ -20,18 +20,10 @@ public class MatchBean implements Serializable{
     private int hasNews;
     private int psj;
 
-    private int type;//自己添加来区分布局的
 
     private NewsFlagsBean newsFlags;
     private List<CollsBean> colls;
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
 
     public int getHasLevelUp() {
         return hasLevelUp;
@@ -130,6 +122,15 @@ public class MatchBean implements Serializable{
         private String ruleId;
         private List<ItemsBean> items;
 
+        private int type;//自己添加来区分布局的
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
         public String getDesc() {
             return desc;
         }

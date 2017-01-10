@@ -39,10 +39,10 @@ public class MatchPullAsyncUtil extends AsyncTask<String,Void,List<String>>{
         //通知刷新控件异步请求事件完成
         pullToRefreshListView.onRefreshComplete();
         if ("1".equals(flag)){//说明是下拉刷新
-            RetrofitUtil.updateData(matchPullListAdapter,page);
+            //RetrofitUtil.updateData(matchPullListAdapter,page);
             matchPullListAdapter.notifyDataSetChanged();
         }else if ("2".equals(flag)){//说明是上拉加载
-            RetrofitUtil.updateData(matchPullListAdapter,page);
+            //RetrofitUtil.updateData(matchPullListAdapter,page);
             matchPullListAdapter.notifyDataSetChanged();
         }
     }
