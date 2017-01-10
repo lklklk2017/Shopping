@@ -174,22 +174,33 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@id/tv_sendFrom"
                     android:layout_below="@id/img_logo"/>
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:id="@+id/img_returnPolicy"
-                    android:src="@mipmap/ic_finish"
-                    android:layout_below="@id/img_logo"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@id/tv_returnPolicy"/>
             </RelativeLayout>
-
+            <RelativeLayout
+                android:id="@+id/layout3"
+                android:layout_below="@id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#ccc"/>
+                    <ExpandableListView
+                        android:id="@+id/ex_listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                    </ExpandableListView>
+                </LinearLayout>
+            </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
 
     <RelativeLayout
-        android:background="#ccc"
+        android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="40dp">

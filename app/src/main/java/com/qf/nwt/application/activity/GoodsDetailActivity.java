@@ -5,14 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.adapter.AdapterOfExpandableListView;
 import com.qf.nwt.application.adapter.AdapterOfGoodsDetailPager;
+import com.qf.nwt.application.bean.Children;
 import com.qf.nwt.application.bean.GoodsDetailEntity;
+import com.qf.nwt.application.bean.Group;
 import com.qf.nwt.application.service.HttpApiServiceOfGoodsDetail;
 
 import java.util.ArrayList;
@@ -44,8 +48,11 @@ public class GoodsDetailActivity extends AppCompatActivity {
 
     private List<GoodsDetailEntity.ImagesBean> dataList = new ArrayList<>();
     private AdapterOfGoodsDetailPager adapter;
+    private AdapterOfExpandableListView adapterOfExpandableListView;
     private LinearLayout layout_params;
-
+    private ExpandableListView ex_listView;
+    private String[] groups = new String[]{"商品详情"};
+    private List<Group> groupList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,13 @@ public class GoodsDetailActivity extends AppCompatActivity {
      * 初始化监听
      */
     private void initListener() {
+
+        ex_listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                return true;
+            }
+        });
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,6 +137,7 @@ public class GoodsDetailActivity extends AppCompatActivity {
                         List<GoodsDetailEntity.ImagesBean> images = goodsDetailEntity.getImages();
                         dataList.addAll(images);
                         adapter.notifyDataSetChanged();
+
                         for (int i = 0; i < dataList.size(); i++) {
                             //加载圆点（指示器）
                             ImageView imgPoint = new ImageView(GoodsDetailActivity.this);
@@ -142,7 +157,7 @@ public class GoodsDetailActivity extends AppCompatActivity {
                         String brC = goodsDetailEntity.getBrand().getBrC();
                         tv_brc.setText(brC);
                         int prc = goodsDetailEntity.getPrices().get(0).getPrc();
-                        tv_price.setText(prc+"");
+                        tv_price.setText("￥"+prc+"");
                         String logo = goodsDetailEntity.getVendor().getLogo();
                         Glide.with(GoodsDetailActivity.this)
                                 .load(logo)
@@ -159,19 +174,43 @@ public class GoodsDetailActivity extends AppCompatActivity {
                         String returnPolicy = goodsDetailEntity.getVendor().getReturnPolicy();
                         tv_returnPolicy.setText(returnPolicy);
                     }
+
+
                 });
+
     }
 
     /**
      * 初始化适配器
      */
     private void initAdapter() {
+        for (int i = 0; i < groups.length; i++) {
+            Group group = new Group();
+            group.setTitle(groups[i]);
+            List<Children> childrens = new ArrayList<>();
+            for (int j = 0; j < dataList.size(); j++) {
+                Children children = new Children();
+                children.setImg_url(dataList.get(i).getUrl());
+                childrens.add(children);
+            }
+            Log.e("====", "childrens.size()=" + childrens.size());
+            group.setChildrens(childrens);
+            groupList.add(group);
+        }
+
         adapter = new AdapterOfGoodsDetailPager(this);
         //加载空数据
         vp_img.setAdapter(adapter);
         adapter.setImagesBeanList(dataList);
         //加载有数据
         vp_img.setAdapter(adapter);
+
+        adapterOfExpandableListView = new AdapterOfExpandableListView(this);
+        //加载空数据
+        ex_listView.setAdapter(adapterOfExpandableListView);
+        //加载有数据
+        adapterOfExpandableListView.setGroups(groupList);
+        ex_listView.setAdapter(adapterOfExpandableListView);
 
     }
 
@@ -193,5 +232,6 @@ public class GoodsDetailActivity extends AppCompatActivity {
         tv_sendFrom = (TextView) findViewById(R.id.tv_sendFrom);
         tv_returnPolicy = (TextView) findViewById(R.id.tv_returnPolicy);
         layout_params = (LinearLayout) findViewById(R.id.layout_params);
+        ex_listView = (ExpandableListView) findViewById(R.id.ex_listView);
     }
 }
