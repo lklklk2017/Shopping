@@ -4,7 +4,15 @@
         "source": "C:\\Users\\Administrator\\Desktop\\Progect\\Shopping\\ptr_lib\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     },
     {
+        "merged": "F:\\AndroidCode\\Shopping\\ptr_lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "F:\\AndroidCode\\Shopping\\ptr_lib\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrator\\Desktop\\Progect\\Shopping\\ptr_lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
         "source": "C:\\Users\\Administrator\\Desktop\\Progect\\Shopping\\ptr_lib\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "F:\\AndroidCode\\Shopping\\ptr_lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "F:\\AndroidCode\\Shopping\\ptr_lib\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
     }
 ]
