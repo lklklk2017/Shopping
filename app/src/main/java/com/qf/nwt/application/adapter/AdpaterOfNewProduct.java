@@ -1,6 +1,7 @@
 package com.qf.nwt.application.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.activity.GoodsDetailActivity;
+import com.qf.nwt.application.bean.GoodsDetailEntity;
 import com.qf.nwt.application.bean.NewProductInfo;
 
 import java.util.List;
@@ -63,6 +66,14 @@ public class AdpaterOfNewProduct extends RecyclerView.Adapter<AdpaterOfNewProduc
 
         //价钱
         holder.price.setText("￥"+itemsBean.getMprice());
+
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, GoodsDetailActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
