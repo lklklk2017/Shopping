@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
 import com.qf.nwt.application.bean.NewProductInfo;
 
@@ -21,7 +22,7 @@ public class AdpaterOfNewProduct extends RecyclerView.Adapter<AdpaterOfNewProduc
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private List<NewProductInfo> list;
+    private List<NewProductInfo.ItemsBean> list;
 
 
 
@@ -30,8 +31,9 @@ public class AdpaterOfNewProduct extends RecyclerView.Adapter<AdpaterOfNewProduc
         this.context = context;
     }
 
-    public void setList(List<NewProductInfo> list) {
+    public void setList(List<NewProductInfo.ItemsBean> list) {
         this.list = list;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -43,12 +45,33 @@ public class AdpaterOfNewProduct extends RecyclerView.Adapter<AdpaterOfNewProduc
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        NewProductInfo.ItemsBean itemsBean = list.get(position);
 
+        //图片
+        Glide.with(context)
+                .load(itemsBean.getImgURL())
+                .placeholder(R.mipmap.ic_launcher)
+                .skipMemoryCache(true)
+                .into(holder.img);
+        holder.img.setScaleType(ImageView.ScaleType.FIT_XY);
+
+        //title
+        holder.title.setText(itemsBean.getTitle());
+
+        //品牌
+        holder.brand.setText(itemsBean.getBrand());
+
+        //价钱
+        holder.price.setText("￥"+itemsBean.getMprice());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        if(null!=list&&list.size()!=0){
+            return list.size();
+        }else{
+            return -1;
+        }
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

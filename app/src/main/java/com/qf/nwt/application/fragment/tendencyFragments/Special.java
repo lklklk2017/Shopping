@@ -10,21 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.activity.Myapplication;
 import com.qf.nwt.application.adapter.AdapterOfSpecial;
 import com.qf.nwt.application.bean.SpecialInfo;
 import com.qf.nwt.application.service.HttpApiServiceOfSpecial;
+import com.qf.nwt.application.utils.MyRetrofitUtil;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 趋势--->专题 该布局采用瀑布流
@@ -32,15 +26,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Special extends Fragment {
 
-    private String path = "http://api.palshock.cn/";
 
     private View view;
     private RecyclerView rcy;
     private ArrayList<SpecialInfo.TopicsBean> list;
-    private AdapterOfSpecial adater;
     private HttpApiServiceOfSpecial api;
     private static int page;
     private SwipeRefreshLayout swip;
+    private AdapterOfSpecial adapter;
 
     public Special() {
         // Required empty public constructor
@@ -59,7 +52,6 @@ public class Special extends Fragment {
 
     private void init() {
         initView();
-        initRetrofit();
         initAdatpter();
         initData();
         initListener();
@@ -69,7 +61,7 @@ public class Special extends Fragment {
         swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                initNet();
+                MyRetrofitUtil.getSpecialData(page++,list,adapter,swip);
             }
         });
 
@@ -87,13 +79,7 @@ public class Special extends Fragment {
 
                     case RecyclerView.SCROLL_STATE_IDLE:
                         if (last == (list.size() - 1)) {
-                            initNet();
-                        }
-                        break;
-
-                    case RecyclerView.SCROLL_STATE_SETTLING:
-                        if (last == (list.size() - 1)) {
-                            initNet();
+                            MyRetrofitUtil.getSpecialData(page++,list,adapter,swip);
                         }
                         break;
 
@@ -112,48 +98,14 @@ public class Special extends Fragment {
         });
     }
 
-    private void initRetrofit() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(path)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        api = retrofit.create(HttpApiServiceOfSpecial.class);
-    }
-
     private void initAdatpter() {
-        adater = new AdapterOfSpecial(getContext());
-        rcy.setAdapter(adater);
+        adapter = new AdapterOfSpecial(getContext());
+        rcy.setAdapter(adapter);
     }
 
     private void initData() {
         list = new ArrayList<>();
-
-        initNet();
-    }
-
-    private void initNet() {
-
-        swip.setRefreshing(true);
-        Call<SpecialInfo> call = api.getData(page++);
-        call.enqueue(new Callback<SpecialInfo>() {
-            @Override
-            public void onResponse(Call<SpecialInfo> call, Response<SpecialInfo> response) {
-                SpecialInfo info = response.body();
-                List<SpecialInfo.TopicsBean> topics = info.getTopics();
-                list.addAll(topics);
-                adater.setList(list);
-                call.cancel();
-                swip.setRefreshing(false);
-            }
-
-            @Override
-            public void onFailure(Call<SpecialInfo> call, Throwable t) {
-                Toast.makeText(getContext(), "请求网络数据失败", Toast.LENGTH_LONG).show();
-                call.cancel();
-                swip.setRefreshing(false);
-            }
-        });
+        MyRetrofitUtil.getSpecialData(page++,list,adapter,swip);
     }
 
     private void initView() {
@@ -161,7 +113,7 @@ public class Special extends Fragment {
         swip = (SwipeRefreshLayout) view.findViewById(R.id.swipe_Special);
 
         //设置layoutManager
-        rcy.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcy.setLayoutManager(new LinearLayoutManager(Myapplication.getContext()));
         swip.setColorSchemeColors(Color.RED, Color.BLUE, Color.YELLOW);
     }
 }

@@ -23,6 +23,7 @@
             android:layout_height="match_parent"
             android:background="@mipmap/ic_back"
             android:layout_alignParentLeft="true"
+            android:onClick="back"
             />
         <!--标题-->
         <TextView
@@ -43,7 +44,7 @@
             android:textSize="18sp"
             android:text="排序"
             />
-        <view
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black"
@@ -62,7 +63,6 @@
             android:id="@+id/recycle_NewProduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_orange_light"
             />
     </android.support.v4.widget.SwipeRefreshLayout>
 

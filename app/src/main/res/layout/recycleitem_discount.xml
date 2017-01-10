@@ -9,13 +9,18 @@
     app:cardCornerRadius="5dp"
     >
 
-    <!--img-->
     <RelativeLayout
-        android:id="@+id/img_discount"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@mipmap/ic_launcher"
+        android:layout_height="220dp"
         >
+
+        <!--img-->
+        <ImageView
+            android:id="@+id/img_discount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
         <!--desc-->
         <TextView
             android:id="@+id/desc_discount"
@@ -39,7 +44,7 @@
                 android:id="@+id/title_discount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:textColor="@android:color/white"
                 android:text="@string/discount_title"
                 />

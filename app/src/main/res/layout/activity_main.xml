@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/radioButtonLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="65dp"
         android:layout_alignParentBottom="true"
         >
 
@@ -29,7 +29,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:drawableTop="@mipmap/ic_launcher"
+                android:drawableTop="@mipmap/bt_trendency_checked"
                 android:text="趋势"
                 android:gravity="center"
                 />
@@ -40,7 +40,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:drawableTop="@mipmap/ic_launcher"
+                android:drawableTop="@mipmap/bt_match_checked"
                 android:text="小搭"
                 android:gravity="center"
                 />
@@ -51,7 +51,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:drawableTop="@mipmap/ic_launcher"
+                android:drawableTop="@mipmap/bt_show_checked"
                 android:text="展示"
                 android:gravity="center"
                 />
@@ -62,7 +62,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:drawableTop="@mipmap/ic_launcher"
+                android:drawableTop="@mipmap/bt_cart_checked"
                 android:text="购物车"
                 android:gravity="center"
                 />
@@ -73,7 +73,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:drawableTop="@mipmap/ic_launcher"
+                android:drawableTop="@mipmap/bt_me_checked"
                 android:text="我"
                 android:gravity="center"
                 />

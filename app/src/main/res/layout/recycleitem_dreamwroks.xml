@@ -8,12 +8,17 @@
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
-    <!--背景图片-->
     <RelativeLayout
-        android:id="@+id/img_dreamworks"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@mipmap/ic_launcher">
+        android:layout_height="310dp"
+        >
+
+        <!--背景图片-->
+        <ImageView
+            android:id="@+id/img_dreamworks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
         <!--底部-->
         <RelativeLayout
@@ -25,13 +30,14 @@
             <!--标题-->
             <TextView
                 android:id="@+id/title_dreamworks"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/recyitem_title"
                 android:textColor="@android:color/white"
-                android:textSize="25sp" />
+                android:singleLine="true"
+                android:textSize="25sp"/>
             <!--描述-->
             <TextView
                 android:id="@+id/desc_dreamworks"
@@ -40,7 +46,9 @@
                 android:layout_alignLeft="@id/title_dreamworks"
                 android:layout_below="@id/title_dreamworks"
                 android:text="@string/dreamwork_desc"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:lines="2"
+                />
         </RelativeLayout>
 
     </RelativeLayout>

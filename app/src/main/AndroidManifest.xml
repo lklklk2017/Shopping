@@ -20,7 +20,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".activity.SmsRegist"
+        android:name=".activity.Myapplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -33,11 +33,12 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.WelcomeAcitivty">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity
             android:name=".activity.SettingActivity"
@@ -50,7 +51,13 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.CollectionActivity" />
         <activity android:name=".activity.NewProductActivity" />
-        <activity android:name=".activity.GoodsDetailActivity"></activity>
+        <activity android:name=".activity.ThemActivity">
+             <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
+        </activity>
     </application>
 
 </manifest>

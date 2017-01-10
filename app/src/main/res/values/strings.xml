@@ -17,4 +17,5 @@
     <string name="dreamwork_desc">这是描述</string>
     <string name="discount_title">展示title</string>
     <string name="discount_time">展示时间</string>
+    <string name="Theme_title">主题详情</string>
 </resources>
