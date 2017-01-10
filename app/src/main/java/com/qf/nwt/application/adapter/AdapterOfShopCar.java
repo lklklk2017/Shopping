@@ -1,6 +1,7 @@
 package com.qf.nwt.application.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.activity.GoodsDetailActivity;
 import com.qf.nwt.application.bean.GoodsPropertiesEntity;
 import com.qf.nwt.application.bean.ShopCarDetailEntity;
 import com.qf.nwt.application.callback.OnItemCheckedListener;
@@ -164,6 +166,13 @@ public class AdapterOfShopCar extends RecyclerView.Adapter<AdapterOfShopCar.MyVi
                 if (onNumDescListener != null) {
                     onNumDescListener.onNumDescListener();
                 }
+            }
+        });
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, GoodsDetailActivity.class);
+                context.startActivity(intent);
             }
         });
         //适配数据
