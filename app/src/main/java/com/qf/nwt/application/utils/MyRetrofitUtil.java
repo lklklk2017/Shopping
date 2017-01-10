@@ -8,9 +8,11 @@ import com.qf.nwt.application.adapter.AdapterOfDiscount;
 import com.qf.nwt.application.adapter.AdapterOfDreamWorks;
 import com.qf.nwt.application.adapter.AdapterOfInspirRcy;
 import com.qf.nwt.application.adapter.AdapterOfSpecial;
+import com.qf.nwt.application.adapter.AdpaterOfNewProduct;
 import com.qf.nwt.application.bean.DiscountInfo;
 import com.qf.nwt.application.bean.DreamWorksInfo;
 import com.qf.nwt.application.bean.InspirationInfo;
+import com.qf.nwt.application.bean.NewProductInfo;
 import com.qf.nwt.application.bean.SpecialInfo;
 import com.qf.nwt.application.service.MatchApiService;
 
@@ -23,6 +25,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
+import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -200,5 +203,33 @@ public class MyRetrofitUtil {
                 });
     }
 
+    /**
+     * 趋势-新品详情
+     */
+    public static void getNewproductData(int page, final List<NewProductInfo.ItemsBean> list, final AdpaterOfNewProduct adapter,final SwipeRefreshLayout swip){
+        swip.setRefreshing(true);
 
+        Observable<NewProductInfo> matchNewProduct = apiService.getMatchNewProduct(page);
+        matchNewProduct.subscribeOn(Schedulers.io())//事件执行的线程（子线程）
+                .observeOn(AndroidSchedulers.mainThread())//结果展示的线程
+                .subscribe(new Observer<NewProductInfo>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(Myapplication.getContext(),"获取网络数据失败",Toast.LENGTH_LONG).show();
+                        swip.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onNext(NewProductInfo newProductInfo) {
+                        list.addAll(newProductInfo.getItems());
+                        adapter.setList(list);
+                        swip.setRefreshing(false);
+                    }
+                });
+    }
 }

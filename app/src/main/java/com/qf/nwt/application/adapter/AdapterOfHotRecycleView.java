@@ -1,6 +1,7 @@
 package com.qf.nwt.application.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.activity.NewProductActivity;
 import com.qf.nwt.application.bean.HotInfo;
 import com.qf.nwt.application.utils.ScreenMatch;
 
@@ -225,13 +227,13 @@ public class AdapterOfHotRecycleView extends RecyclerView.Adapter {
                 holder2.img_rb.setScaleType(ImageView.ScaleType.FIT_XY);
 
                 //设置控件的监听事件
-//                holder2.img_lt.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(context, NewProduct.class);
-//                        context.startActivity(intent);
-//                    }
-//                });
+                holder2.img_lt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, NewProductActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
             }
 
         } else if (holder instanceof OneViewHolder) {

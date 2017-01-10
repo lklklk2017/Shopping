@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_them"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.qf.nwt.application.activity.ThemActivity">
+
+
+
+    <!--标题预览-->
+    <RelativeLayout
+        android:id="@+id/rel_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        >
+
+        <!--返回键-->
+        <ImageView
+            android:id="@+id/back_Theme"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@mipmap/ic_back"
+            android:layout_alignParentLeft="true"
+            />
+        <!--标题-->
+        <TextView
+            android:id="@+id/title_Theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:text="@string/Theme_title"
+            />
+        <!--右上角功能(分享)-->
+        <Button
+            android:id="@+id/order_Theme"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/ic_share"
+            android:layout_marginRight="10dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+    <!--内容-->
+    <FrameLayout
+        android:id="@+id/replace_Theme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_red_light"
+        android:layout_below="@id/rel_title"
+        android:layout_above="@id/line"
+        >
+    </FrameLayout>
+
+
+    <!--底部评论栏-->
+    <LinearLayout
+        android:id="@+id/lin_comment"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <!--装载图片的布局-->
+        <RelativeLayout
+            android:id="@+id/lin_img_Theme"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@mipmap/ic_themedislike"
+                />
+        </RelativeLayout>
+
+        <!--装载图片文字的布局-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:background="@drawable/theme_bg"
+            >
+            <!--pic-->
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@mipmap/ic_text_theme"
+                />
+            <!--text-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#8A8B8E"
+                android:text="我来说两句"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!--底部线条-->
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        android:layout_above="@id/lin_comment"
+        />
+
+</RelativeLayout>

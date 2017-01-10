@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.qf.nwt.application.fragment.themefragements.ThemeContent">
+
+    <!--swip-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_ThemeContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <!--recycleview-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_Theme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!--&lt;!&ndash;评论列表&ndash;&gt;-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:background="@android:color/holo_orange_light"-->
+        <!--android:layout_below="@id/swipe_Theme"-->
+        <!--&gt;-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="这里是评论区"-->
+            <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+</RelativeLayout>
