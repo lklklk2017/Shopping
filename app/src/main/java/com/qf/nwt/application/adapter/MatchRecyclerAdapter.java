@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.qf.nwt.application.R;
+import com.qf.nwt.application.activity.GoodsDetailActivity;
 import com.qf.nwt.application.bean.MatchBean;
 
 import java.util.ArrayList;
@@ -283,7 +284,8 @@ public class MatchRecyclerAdapter extends RecyclerView.Adapter<MatchRecyclerAdap
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent=new Intent(this,)
+                Intent intent=new Intent(context, GoodsDetailActivity.class);
+                context.startActivity(intent);
             }
         });
     }
